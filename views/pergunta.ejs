@@ -1,0 +1,31 @@
+<%# Partials serve para poder reciclar o codigo em demais ejs sem a necessidade de reescrever %>
+<%- include('partials/header.ejs') %>
+<body>
+    <%- include('partials/navbar.ejs') %>
+    <div class="container">
+        <br>
+        <br>
+        <div class="card-header">
+            <%# Titulo que seria o nome da coluna no SQL %>
+            <h3><%= pergunta.titulo %></h3>
+        </div>
+        <div class="card-body">
+            <%= pergunta.descricao %>
+            <hr class="hr">
+        </div>
+        <div class="card-body">
+            <% respostas.forEach(resposta => {%>
+                <%= resposta.corpo %> <hr class="hr">
+            <% }) %>
+           
+        <form method="POST" action="/responder"> <%# Action é pra onde aponta o formulario %>
+            <h5>Responda:</h5>
+            <textarea placeholder="Digite sua resposta" class="form-control" name="corpo"></textarea>
+            <br>
+            <input type="hidden" name="pergunta" value="<%= pergunta.id %>">
+            <button type="submit" class="btn btn-primary">Responder</button>
+        </form>
+        </div>
+    </div>
+</body>
+<%- include('partials/footer.ejs') %>
